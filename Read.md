@@ -16,4 +16,5 @@
 13. npm i concurrently --save-dev  
 14. concurrently --kill-others \"npm run start\" \"npm run json:server\"      //// multiple server run together.  
 
+
 watch code realm https://www.youtube.com/watch?v=WzX0zNAgScA&list=PLcCp4mjO-z9_4Wak3Uq8dEWC6H1fbSNgL&index=3

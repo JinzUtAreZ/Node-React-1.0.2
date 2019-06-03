@@ -55,6 +55,14 @@ git bash update instructions
 7. git push origin master
 8. git remote rm origin -- add version and renew link in github.
 
+git bash clone directory from Repository to local
+1. Go to preferred directory cd c:\"Name of Directory"
+2. git clone "Repository Url in github"
+3. cd "Folder Name"
+4. ls   ------ check files
+5. git remote -v  ------- if repo does not exist continue 6.
+6. git remote add origin "Repository Url in github"   
+    ---- press insert key to copy paste repo url
 
 node server
 1. npm init -y   ------ create package json file

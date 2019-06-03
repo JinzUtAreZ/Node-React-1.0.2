@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import React, { Fragment,Component } from 'react';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 // import BSTable from './BootStrapTable';
-import Listdata from './listdata'
+import Listdata from './listdata';
+import NotFound from '../component/Error';
 
 class App extends Component {
     constructor(props) {
@@ -13,8 +14,8 @@ class App extends Component {
     }
     
     async componentDidMount() {
-      const jsonresults = await (await fetch('http://localhost:3004/writers')).json()
-  
+      const jsonresults = await (await fetch('http://localhost:3004/writers?_embed=texts')).json()
+      // 'http://localhost:3004/writers   // first level route
       this.setState({ jsonresults })
     }
 
@@ -54,15 +55,21 @@ class App extends Component {
                 ))};
             </ul> */}
             <BrowserRouter>
+            <Fragment>
             <ul>
                <li><Link to="/">Home</Link></li>
-               <li><Link to="/writers">Asset</Link></li>
+               <li><Link to="/writers">Writers</Link></li>
             </ul>
             <hr/>
-            <Route exact path="/" render={() => <div>Home</div>} />
-            <Route path="/writers" render={
-                props => <Listdata {...props} datalist={jsonresults} />
-                } />
+            <Switch>
+              <Route exact path="/" render={() => <div>Home</div>} />
+              <Route path="/writers" render={
+                  props => <Listdata {...props} datalist={jsonresults} />
+                  } />
+              <Route component={NotFound}></Route> 
+              {/* use predefined folder function  */}
+            </Switch>
+            </Fragment>
             </BrowserRouter>
         </div>
       );

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import {Link, Route} from 'react-router-dom';
-import Writer from './eachdata'
+import {Link, Route, Redirect} from 'react-router-dom';
+import PerData from './eachdata';
 
 export default ({ match: { url }, datalist }) =>
   <Fragment>
@@ -11,8 +11,16 @@ export default ({ match: { url }, datalist }) =>
         </li>
       )}
     </ul>
-        
+        <Route exact path={url} render={() => <h3>Please Select a writer</h3>}/>
         <Route path={`${url}/:writerId`} render={
-            ({ match }) => <Writer {...datalist.find(writer=> writer.id === match.params.id)}/>
+            props => {
+                const writer = datalist.find(writer=> writer.id === props.match.params.writerId )
+                if(!writer){
+                  return <Redirect to="/404"/>
+                  // use Redirect function by react
+                }
+                return <PerData {...props} {...writer}/>
+            }
         }/>
+        
     </Fragment>
